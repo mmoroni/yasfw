@@ -3,16 +3,12 @@ jobs:
   build:
     strategy:
       matrix:
-        rust_triplet: [x86_64-pc-windows-msvc, i686-pc-windows-msvc]
+        rust_triplet: [x86_64-pc-windows-msvc]
         include:
           - rust_triplet: x86_64-pc-windows-msvc
             vcpkg_triplet: x64-windows-static
             arch: x86_64
-            abi: msvc
-          - rust_triplet: i686-pc-windows-msvc
-            vcpkg_triplet: x86-windows-static
-            arch: i686
-            abi: msvc
+            abi: msvc          
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@master
@@ -39,6 +35,3 @@ jobs:
               .\LICENSE `
               .\dokan1.dll `
               .\target\${{ matrix.rust_triplet }}\release\yasfw.exe `
-
-          curl.exe -fsS -T release.zip -u ddosolitary:${{ secrets.BINTRAY_KEY }} https://api.bintray.com/content/ddosolitary/dev-releases/default/default/yasfw/yasfw-$(git describe --tags)-${{ matrix.arch }}-${{ matrix.abi }}.zip
-          curl.exe -fsS -X POST -u ddosolitary:${{ secrets.BINTRAY_KEY }} https://api.bintray.com/content/ddosolitary/dev-releases/default/default/publish
