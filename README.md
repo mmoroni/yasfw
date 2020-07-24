@@ -1,4 +1,4 @@
-# yasfw
+# yasfw!
 
 ![Build status](https://github.com/DDoSolitary/yasfw/workflows/.github/workflows/build.yml/badge.svg)
 
